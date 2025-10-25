@@ -32,13 +32,8 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/" className="text-slate-400 hover:text-cyan-400 transition-colors text-sm">
+                <a href="/profile" className="text-slate-400 hover:text-cyan-400 transition-colors text-sm">
                   👤 Về tôi
-                </a>
-              </li>
-              <li>
-                <a href="/" className="text-slate-400 hover:text-cyan-400 transition-colors text-sm">
-                  🏆 Thành tích
                 </a>
               </li>
             </ul>
