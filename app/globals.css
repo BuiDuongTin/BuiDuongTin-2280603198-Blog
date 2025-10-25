@@ -3,27 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 15, 23, 42;
-  --background-start-rgb: 255, 255, 255;
-  --background-end-rgb: 241, 245, 249;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 248, 250, 252;
-    --background-start-rgb: 15, 23, 42;
-    --background-end-rgb: 30, 41, 59;
-  }
+  --foreground-rgb: 248, 250, 252;
+  --background-rgb: 15, 23, 42;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: rgb(var(--background-rgb));
   min-height: 100vh;
 }
 
@@ -66,20 +52,22 @@ body {
 
 /* Prose styles for blog posts */
 .prose code {
-  background-color: #f3f4f6;
-  padding: 2px 6px;
+  background-color: #1e293b;
+  padding: 3px 8px;
   border-radius: 4px;
   font-size: 0.9em;
-  color: #dc2626;
+  color: #22d3ee;
+  font-family: 'Consolas', 'Monaco', monospace;
 }
 
 .prose pre {
-  background-color: #1f2937;
-  color: #f3f4f6;
-  padding: 1rem;
+  background-color: #1e293b;
+  color: #e2e8f0;
+  padding: 1.25rem;
   border-radius: 8px;
   overflow-x: auto;
   margin: 1.5rem 0;
+  border: 1px solid #334155;
 }
 
 .prose pre code {
