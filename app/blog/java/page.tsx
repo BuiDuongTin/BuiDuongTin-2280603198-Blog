@@ -5,85 +5,73 @@ export default function JavaBlogPage() {
   const posts = getBlogPostsByCategory('java')
 
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="text-center mb-16 animate-fade-in">
-        <div className="text-7xl mb-6">☕</div>
-        <h1 className="text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-orange-600 via-red-600 to-orange-600 bg-clip-text text-transparent">
-          Java Programming
+    <div className="container mx-auto px-4 py-12">
+      <div className="text-center mb-12 animate-fade-in">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-orange-600">
+          ☕ Java Programming
         </h1>
-        <p className="text-2xl text-gray-600 max-w-3xl mx-auto font-medium">
-          Khám phá kiến thức về Java, OOP, Collections, Multithreading và Network Programming
+        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          Các bài viết về lập trình Java và lập trình mạng
         </p>
-        <div className="mt-6 inline-flex items-center gap-2 bg-orange-100 text-orange-800 px-6 py-3 rounded-full font-semibold border-2 border-orange-200">
-          <span className="text-2xl">📚</span>
-          <span>{posts.length} bài viết Java</span>
-        </div>
       </div>
 
       {/* Filter Section */}
-      <div className="flex justify-center mb-12 gap-6 flex-wrap">
+      <div className="flex justify-center mb-8 gap-4">
         <Link
           href="/blog"
-          className="px-8 py-4 bg-white text-gray-700 rounded-xl hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl font-bold text-lg hover:scale-105 border-2 border-gray-200"
+          className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
         >
           Tất cả
         </Link>
         <Link
           href="/blog/java"
-          className="px-8 py-4 bg-gradient-to-r from-orange-600 to-red-600 text-white rounded-xl shadow-2xl shadow-orange-500/50 transition-all duration-300 font-bold text-lg scale-105 border-2 border-orange-400"
+          className="px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors shadow-md"
         >
-          <span className="flex items-center gap-2">
-            <span className="text-2xl">☕</span>
-            <span>Java</span>
-            <span className="bg-white text-orange-600 px-3 py-1 rounded-full text-sm font-bold">{posts.length}</span>
-          </span>
+          ☕ Java ({posts.length})
         </Link>
         <Link
           href="/blog/javascript"
-          className="px-8 py-4 bg-white text-gray-700 rounded-xl hover:bg-gradient-to-r hover:from-yellow-500 hover:to-yellow-600 hover:text-white transition-all duration-300 shadow-lg hover:shadow-2xl font-bold text-lg hover:scale-105 border-2 border-gray-200"
+          className="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
         >
-          <span className="flex items-center gap-2">
-            <span className="text-2xl">💻</span>
-            <span>JavaScript</span>
-          </span>
+          💻 JavaScript
         </Link>
       </div>
 
       {/* Blog Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 animate-fade-in">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in">
         {posts.map((post, index) => (
           <article
             key={post.id}
-            className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-3 overflow-hidden border-t-4 border-orange-500 group"
+            className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border-t-4 border-orange-500"
             style={{ animationDelay: `${index * 0.1}s` }}
           >
-            <div className="p-8">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-4xl group-hover:scale-125 transition-transform duration-300">☕</span>
-                <span className="text-sm text-gray-500 bg-orange-100 px-4 py-2 rounded-full font-semibold">
+            <div className="p-6">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-2xl">☕</span>
+                <span className="text-sm text-gray-500">
                   {new Date(post.date).toLocaleDateString('vi-VN', {
                     year: 'numeric',
-                    month: 'short',
+                    month: 'long',
                     day: 'numeric'
                   })}
                 </span>
               </div>
               
-              <h2 className="text-2xl font-bold mb-4 text-gray-800 line-clamp-2 group-hover:text-orange-600 transition-colors leading-tight">
+              <h2 className="text-xl font-bold mb-3 text-gray-800 line-clamp-2 hover:text-orange-600 transition-colors">
                 <Link href={`/blog/${post.id}`}>
                   {post.title}
                 </Link>
               </h2>
               
-              <p className="text-gray-600 mb-6 line-clamp-3 leading-relaxed text-base">
+              <p className="text-gray-600 mb-4 line-clamp-3">
                 {post.excerpt}
               </p>
               
-              <div className="flex flex-wrap gap-2 mb-6">
+              <div className="flex flex-wrap gap-2 mb-4">
                 {post.tags.slice(0, 3).map((tag) => (
                   <span
                     key={tag}
-                    className="px-4 py-2 bg-gradient-to-r from-orange-100 to-red-100 text-orange-700 text-sm rounded-full font-semibold border border-orange-200 hover:scale-105 transition-transform"
+                    className="px-3 py-1 bg-orange-100 text-orange-700 text-sm rounded-full"
                   >
                     #{tag}
                   </span>
@@ -92,25 +80,13 @@ export default function JavaBlogPage() {
               
               <Link
                 href={`/blog/${post.id}`}
-                className="inline-flex items-center gap-2 text-orange-600 hover:text-orange-700 font-bold transition-all group-hover:gap-4 text-lg"
+                className="inline-flex items-center text-orange-600 hover:text-orange-700 font-semibold transition-colors"
               >
-                <span>Đọc thêm</span>
-                <span className="text-xl group-hover:translate-x-2 transition-transform">→</span>
+                Đọc thêm →
               </Link>
             </div>
           </article>
         ))}
-      </div>
-
-      {/* Back to all posts */}
-      <div className="mt-20 text-center">
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-3 bg-gradient-to-r from-orange-600 to-red-600 text-white px-10 py-5 rounded-xl font-bold text-xl hover:shadow-2xl hover:shadow-orange-500/50 hover:scale-105 transition-all duration-300"
-        >
-          <span className="text-2xl">←</span>
-          <span>Xem tất cả bài viết</span>
-        </Link>
       </div>
     </div>
   )
