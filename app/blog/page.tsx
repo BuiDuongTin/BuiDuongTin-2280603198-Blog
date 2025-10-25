@@ -33,7 +33,7 @@ export default function BlogPage() {
 
   return (
     <div className="bg-slate-900 text-white min-h-screen">
-      <div className="container mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-12">
         {/* Hero Section */}
         <div className="text-center mb-12 animate-fade-in relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800 p-12 border border-slate-700">
           {/* Background pattern */}
@@ -77,11 +77,11 @@ export default function BlogPage() {
         </div>
 
         {/* Blog Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 stagger-children">
           {posts.map((post, index) => (
             <article
               key={post.id}
-              className="group relative bg-slate-800 rounded-lg overflow-hidden hover:bg-slate-700 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/20"
+              className="group relative bg-slate-800 rounded-lg overflow-hidden hover:bg-slate-700 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/20 h-full flex flex-col"
             >
               {/* Top gradient border */}
               <div className="h-1 bg-gradient-to-r from-cyan-400 to-purple-400"></div>

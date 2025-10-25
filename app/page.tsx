@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className="bg-slate-900 text-white">
       {/* Hero Section - 2 Column Layout */}
-      <section className="container mx-auto px-4 py-16 md:py-24">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-16 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Text */}
           <div className="space-y-6 animate-fade-in">
@@ -86,7 +86,7 @@ export default function Home() {
       </section>
 
       {/* Latest Posts Section */}
-      <section className="container mx-auto px-4 py-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 py-16">
         <div className="text-center mb-12 animate-fade-in">
           <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4 inline-block">
             Bài viết mới
@@ -94,11 +94,11 @@ export default function Home() {
           <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-400 mx-auto rounded-full"></div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 stagger-children">
           {posts.map((post) => (
             <article
               key={post.id}
-              className="group relative bg-slate-800 rounded-lg p-6 hover:bg-slate-700 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/20 border-t-4 border-transparent hover:border-cyan-400 overflow-hidden"
+              className="group relative bg-slate-800 rounded-lg p-6 hover:bg-slate-700 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/20 border-t-4 border-transparent hover:border-cyan-400 overflow-hidden h-full flex flex-col"
             >
               {/* Gradient overlay on hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-purple-500/0 group-hover:from-cyan-500/5 group-hover:to-purple-500/5 transition-all duration-300 rounded-lg"></div>
