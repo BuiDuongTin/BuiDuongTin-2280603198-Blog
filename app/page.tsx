@@ -72,11 +72,10 @@ export default function Home() {
           <div className="flex justify-center animate-fade-in">
             <div className="relative animate-float">
               {/* Glow effect */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 blur-2xl opacity-50 animate-pulse-glow"></div>
+              <div className="absolute inset-0 rounded-full blur-2xl opacity-50 animate-pulse-glow bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500"></div>
               {/* Profile circle */}
-              <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-full bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-600 flex items-center justify-center text-7xl md:text-9xl font-extrabold shadow-2xl border-4 border-transparent bg-clip-padding"
+              <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-full flex items-center justify-center text-7xl md:text-9xl font-extrabold shadow-2xl border-4 border-transparent bg-clip-padding bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-600"
                    style={{
-                     background: 'linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #c084fc 100%)',
                      boxShadow: '0 0 60px rgba(34, 211, 238, 0.6), 0 0 100px rgba(192, 132, 252, 0.4)'
                    }}>
                 BĐT
@@ -146,7 +145,7 @@ export default function Home() {
         <div className="text-center mt-12 animate-fade-in">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-slate-800 hover:bg-slate-700 text-cyan-400 font-semibold rounded-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 border-2 border-slate-700 hover:border-cyan-400/50"
+            className="group inline-flex items-center gap-2 px-8 py-3 bg-slate-800 hover:bg-slate-700 text-cyan-400 font-semibold rounded-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 border-2 border-slate-700 hover:border-cyan-400/50"
           >
             Xem tất cả bài viết 
             <span className="group-hover:translate-x-1 transition-transform">→</span>

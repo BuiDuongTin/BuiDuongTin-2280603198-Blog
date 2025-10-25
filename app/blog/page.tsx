@@ -21,6 +21,16 @@ export default function BlogPage() {
     return '📝'
   }
 
+  // Deterministic stats based on post ID
+  const getPostStats = (postId: string) => {
+    const hash = postId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
+    return {
+      views: 100 + (hash % 400),
+      likes: 10 + (hash % 50),
+      comments: 2 + (hash % 20)
+    }
+  }
+
   return (
     <div className="bg-slate-900 text-white min-h-screen">
       <div className="container mx-auto px-4 py-12">
@@ -134,11 +144,11 @@ export default function BlogPage() {
                   )}
                 </div>
 
-                {/* Stats (fake data for design) */}
+                {/* Stats (deterministic based on post ID) */}
                 <div className="flex items-center gap-4 text-xs text-slate-500">
-                  <span className="flex items-center gap-1">👁️ {Math.floor(Math.random() * 500 + 100)}</span>
-                  <span className="flex items-center gap-1">❤️ {Math.floor(Math.random() * 50 + 10)}</span>
-                  <span className="flex items-center gap-1">💬 {Math.floor(Math.random() * 20 + 2)}</span>
+                  <span className="flex items-center gap-1">👁️ {getPostStats(post.id).views}</span>
+                  <span className="flex items-center gap-1">❤️ {getPostStats(post.id).likes}</span>
+                  <span className="flex items-center gap-1">💬 {getPostStats(post.id).comments}</span>
                 </div>
               </div>
             </article>

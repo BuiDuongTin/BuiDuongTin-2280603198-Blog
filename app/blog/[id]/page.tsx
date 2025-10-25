@@ -22,6 +22,12 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
   const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null
   const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null
 
+  // Deterministic view count based on post ID
+  const getViewCount = (postId: string) => {
+    const hash = postId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
+    return 100 + (hash % 400)
+  }
+
   return (
     <div className="bg-slate-900 text-white min-h-screen">
       {/* Hero Header with Gradient */}
@@ -65,7 +71,7 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
                 🕒 5 phút đọc
               </span>
               <span className="flex items-center gap-2 text-slate-400">
-                📊 {Math.floor(Math.random() * 500 + 100)} lượt xem
+                📊 {getViewCount(post.id)} lượt xem
               </span>
             </div>
 
