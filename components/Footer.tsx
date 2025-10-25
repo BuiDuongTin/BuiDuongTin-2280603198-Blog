@@ -32,13 +32,8 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/" className="text-slate-400 hover:text-cyan-400 transition-colors text-sm">
+                <a href="/profile" className="text-slate-400 hover:text-cyan-400 transition-colors text-sm">
                   👤 Về tôi
-                </a>
-              </li>
-              <li>
-                <a href="/" className="text-slate-400 hover:text-cyan-400 transition-colors text-sm">
-                  🏆 Thành tích
                 </a>
               </li>
             </ul>
@@ -60,7 +55,7 @@ export default function Footer() {
                 Facebook
               </a>
               <a
-                href="https://github.com/"
+                href="https://github.com/BuiDuongTin"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-all hover:translate-x-1 group"

@@ -24,19 +24,10 @@ export default function Header() {
             </li>
             <li>
               <Link
-                href="/"
+                href="/profile"
                 className="relative font-medium text-slate-200 hover:text-cyan-400 transition-colors duration-300 group"
               >
                 Về tôi
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 group-hover:w-full transition-all duration-300"></span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/"
-                className="relative font-medium text-slate-200 hover:text-cyan-400 transition-colors duration-300 group"
-              >
-                Thành tích
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 group-hover:w-full transition-all duration-300"></span>
               </Link>
             </li>
