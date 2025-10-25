@@ -58,7 +58,7 @@ export default function ProfilePage() {
                   <span className="text-cyan-400">Facebook</span>
                 </a>
                 <a
-                  href="https://github.com/"
+                  href="https://github.com/BuiDuongTin"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 px-4 py-3 bg-slate-800 hover:bg-slate-700 rounded-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20"

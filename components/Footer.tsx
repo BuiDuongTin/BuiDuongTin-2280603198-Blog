@@ -55,7 +55,7 @@ export default function Footer() {
                 Facebook
               </a>
               <a
-                href="https://github.com/"
+                href="https://github.com/BuiDuongTin"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-all hover:translate-x-1 group"
