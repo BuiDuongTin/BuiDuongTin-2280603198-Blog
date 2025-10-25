@@ -19,9 +19,15 @@ export default function CodeBlock({ code, language }: CodeBlockProps) {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(code)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    try {
+      await navigator.clipboard.writeText(code)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (error) {
+      // Fallback for browsers that don't support clipboard API
+      console.warn('Failed to copy to clipboard:', error)
+      // Could show an error toast here if needed
+    }
   }
 
   return (
