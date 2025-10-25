@@ -11,21 +11,36 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Text */}
           <div className="space-y-6 animate-fade-in">
-            <h1 className="text-4xl md:text-5xl font-bold">
-              Xin chào, mình là <span className="text-cyan-400">Bùi Dương Tín</span> 👋
+            <p className="text-xl text-cyan-400 font-semibold animate-slide-in">
+              👋 Xin chào, mình là
+            </p>
+            <h1 className="text-5xl md:text-6xl font-extrabold leading-tight">
+              <span className="gradient-text">
+                Bùi Dương Tín
+              </span>
             </h1>
-            <p className="text-lg text-slate-300 leading-relaxed">
+            {/* Decorative line */}
+            <div className="w-32 h-1 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-full"></div>
+            
+            <p className="text-lg md:text-xl text-slate-300 leading-relaxed">
               Sinh viên năm 4 – Chuyên ngành Công nghệ Phần mềm, HUTECH. Mình xây dựng blog này để chia sẻ kiến thức về Java, JavaScript và các bài tập lập trình mạng máy tính.
             </p>
             
             {/* Tags */}
-            <div className="flex flex-wrap gap-3">
-              {['Java', 'JavaScript', 'Networking', 'OOP', 'Web'].map((tag) => (
+            <div className="flex flex-wrap gap-3 animate-slide-up">
+              {[
+                { name: 'Java', icon: '☕' },
+                { name: 'JavaScript', icon: '⚡' },
+                { name: 'Web', icon: '🌐' },
+                { name: 'OOP', icon: '🎯' },
+                { name: 'Networking', icon: '📡' }
+              ].map((tag) => (
                 <span
-                  key={tag}
-                  className="px-4 py-2 bg-slate-800 text-white rounded-full text-sm font-medium hover:bg-slate-700 transition-colors"
+                  key={tag.name}
+                  className="px-4 py-2 bg-slate-800 text-white rounded-full text-sm font-medium hover:bg-slate-700 transition-all hover:scale-105 border-2 border-transparent hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/20"
                 >
-                  {tag}
+                  <span className="mr-1">{tag.icon}</span>
+                  {tag.name}
                 </span>
               ))}
             </div>
@@ -34,25 +49,35 @@ export default function Home() {
             <div className="flex flex-wrap gap-4 pt-4">
               <Link
                 href="/blog"
-                className="px-8 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-cyan-500/50 hover:scale-105 transition-all"
+                className="group px-8 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white font-semibold rounded-lg shadow-lg hover:shadow-cyan-500/50 hover:scale-105 transition-all duration-300"
               >
-                Xem Blog
+                <span className="inline-flex items-center gap-2">
+                  📖 Xem Blog
+                </span>
               </Link>
               <a
                 href="https://github.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-cyan-500/50 hover:scale-105 transition-all"
+                className="group px-8 py-3 bg-slate-800 hover:bg-slate-700 text-cyan-400 font-semibold rounded-lg border-2 border-cyan-400/50 hover:border-cyan-400 shadow-lg hover:shadow-cyan-500/30 hover:scale-105 transition-all duration-300"
               >
-                GitHub
+                <span className="inline-flex items-center gap-2">
+                  💻 GitHub
+                </span>
               </a>
             </div>
           </div>
 
           {/* Right Column - Profile Image */}
           <div className="flex justify-center animate-fade-in">
-            <div className="relative">
-              <div className="w-72 h-72 md:w-96 md:h-96 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-8xl md:text-9xl font-bold shadow-2xl shadow-cyan-500/50 border-4 border-cyan-400">
+            <div className="relative animate-float">
+              {/* Glow effect */}
+              <div className="absolute inset-0 rounded-full blur-2xl opacity-50 animate-pulse-glow bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500"></div>
+              {/* Profile circle */}
+              <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-full flex items-center justify-center text-7xl md:text-9xl font-extrabold shadow-2xl border-4 border-transparent bg-clip-padding bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-600"
+                   style={{
+                     boxShadow: '0 0 60px rgba(34, 211, 238, 0.6), 0 0 100px rgba(192, 132, 252, 0.4)'
+                   }}>
                 BĐT
               </div>
             </div>
@@ -62,56 +87,68 @@ export default function Home() {
 
       {/* Latest Posts Section */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
-          Bài viết mới
-        </h2>
+        <div className="text-center mb-12 animate-fade-in">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4 inline-block">
+            Bài viết mới
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-400 mx-auto rounded-full"></div>
+        </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger-children">
           {posts.map((post) => (
             <article
               key={post.id}
-              className="bg-slate-800 rounded-lg p-6 hover:bg-slate-700 transition-all hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/10"
+              className="group relative bg-slate-800 rounded-lg p-6 hover:bg-slate-700 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-500/20 border-t-4 border-transparent hover:border-cyan-400 overflow-hidden"
             >
-              <div className="mb-3">
-                <span className="text-slate-400 text-sm">
-                  {new Date(post.date).toLocaleDateString('vi-VN', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
-                </span>
-              </div>
-
-              <h3 className="text-xl font-bold mb-3 hover:text-cyan-300 transition-colors">
-                <Link href={`/blog/${post.id}`} className="text-cyan-400">
-                  {post.title}
-                </Link>
-              </h3>
-
-              <p className="text-slate-300 mb-4 line-clamp-3">
-                {post.excerpt}
-              </p>
-
-              <div className="flex flex-wrap gap-2">
-                {post.tags.slice(0, 3).map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 bg-slate-700 text-slate-300 text-xs rounded-full"
-                  >
-                    {tag}
+              {/* Gradient overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-purple-500/0 group-hover:from-cyan-500/5 group-hover:to-purple-500/5 transition-all duration-300 rounded-lg"></div>
+              
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-slate-400 text-sm flex items-center gap-2">
+                    📅 {new Date(post.date).toLocaleDateString('vi-VN', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
                   </span>
-                ))}
+                  <span className="text-xs text-slate-500 flex items-center gap-1">
+                    🕒 5 phút đọc
+                  </span>
+                </div>
+
+                <h3 className="text-xl font-bold mb-3 group-hover:text-cyan-300 transition-colors">
+                  <Link href={`/blog/${post.id}`} className="text-cyan-400">
+                    {post.title}
+                  </Link>
+                </h3>
+
+                <p className="text-slate-300 mb-4 line-clamp-3">
+                  {post.excerpt}
+                </p>
+
+                <div className="flex flex-wrap gap-2">
+                  {post.tags.slice(0, 3).map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 bg-slate-700 text-slate-300 text-xs rounded-full group-hover:bg-slate-600 transition-colors"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
             </article>
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        <div className="text-center mt-12 animate-fade-in">
           <Link
             href="/blog"
-            className="inline-block px-8 py-3 bg-slate-800 hover:bg-slate-700 text-cyan-400 font-semibold rounded-lg transition-all hover:scale-105"
+            className="group inline-flex items-center gap-2 px-8 py-3 bg-slate-800 hover:bg-slate-700 text-cyan-400 font-semibold rounded-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 border-2 border-slate-700 hover:border-cyan-400/50"
           >
-            Xem tất cả bài viết →
+            Xem tất cả bài viết 
+            <span className="group-hover:translate-x-1 transition-transform">→</span>
           </Link>
         </div>
       </section>

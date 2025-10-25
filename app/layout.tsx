@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import ScrollToTop from '@/components/ScrollToTop'
 
 export const metadata: Metadata = {
   title: 'Bùi Dương Tín - Blog Lập Trình Mạng',
@@ -22,13 +23,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi">
-      <body style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+      </head>
+      <body>
         <div className="flex flex-col min-h-screen">
           <Header />
           <main className="flex-grow">
             {children}
           </main>
           <Footer />
+          <ScrollToTop />
         </div>
       </body>
     </html>
