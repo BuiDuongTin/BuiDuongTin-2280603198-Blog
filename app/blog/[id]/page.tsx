@@ -159,8 +159,9 @@ function renderTextContent(text: string) {
   })
 }
 
-export default function BlogPostPage({ params }: { params: { id: string } }) {
-  const post = getBlogPost(params.id)
+export default async function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const post = getBlogPost(id)
   const allPosts = getBlogPosts()
 
   if (!post) {

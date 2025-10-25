@@ -579,107 +579,236 @@ DOM manipulation là nền tảng để tạo ra các trang web động và inte
   },
   {
     id: 'javascript-async-await',
-    title: 'Async/Await - Xử lý bất đồng bộ trong JavaScript',
-    date: '2025-01-23',
+    title: 'Lập trình bất đồng bộ trong JavaScript với Promise và Async/Await',
+    date: '2025-10-10',
     category: 'javascript',
-    excerpt: 'Tìm hiểu về Promises, async/await và cách xử lý operations bất đồng bộ một cách elegant',
-    tags: ['JavaScript cơ bản', 'Async', 'Promises'],
+    excerpt: 'Khám phá cách xử lý code bất đồng bộ trong JavaScript từ Callback Hell đến Promise và Async/Await. Tìm hiểu cách sử dụng Promise.all(), Promise.race() và các kỹ thuật hiện đại để viết code dễ đọc, dễ bảo trì.',
+    tags: ['JavaScript', 'Promise', 'AsyncAwait', 'FetchAPI', 'WebDevelopment'],
+    readingTime: '12 phút',
     content: `
-JavaScript là ngôn ngữ bất đồng bộ, và async/await là cách hiện đại nhất để xử lý asynchronous operations, giúp code dễ đọc và dễ maintain hơn.
+## Phần 1: Giới thiệu về lập trình bất đồng bộ
 
-**Callback Hell (vấn đề cũ):**
+JavaScript là một ngôn ngữ lập trình đơn luồng (single-threaded), có nghĩa là nó chỉ có thể thực thi một công việc tại một thời điểm. Tuy nhiên, nhờ vào khả năng lập trình bất đồng bộ, JavaScript có thể xử lý nhiều tác vụ mà không làm chương trình bị chặn hoặc "đóng băng".
+
+Trong bài viết này, chúng ta sẽ khám phá hai cách tiếp cận hiện đại nhất để xử lý code bất đồng bộ trong JavaScript: Promise và Async/Await. Những kỹ thuật này giúp code của bạn dễ đọc, dễ bảo trì và tránh được "callback hell".
+
+## Phần 2: Từ Callback đến Promise
+
+Trước khi có Promise, callback là phương pháp chính để xử lý các tác vụ bất đồng bộ trong JavaScript. Tuy nhiên, callback có nhiều hạn chế, đặc biệt là khi bạn cần thực hiện nhiều tác vụ bất đồng bộ liên tiếp.
+
+**Callback Hell:** Hãy xem một ví dụ kinh điển về "callback hell":
+
 \`\`\`javascript
-getData(function(a) {
-    getMoreData(a, function(b) {
-        getMoreData(b, function(c) {
-            getMoreData(c, function(d) {
-                // Callback hell!
+getUser(userId, function(user) {
+    getUserPosts(user.id, function(posts) {
+        getPostComments(posts[0].id, function(comments) {
+            displayComments(comments, function() {
+                console.log('Comments displayed');
+                // Và còn nhiều callback lồng nhau nữa...
             });
         });
     });
 });
 \`\`\`
 
-**Promises:**
+Như bạn thấy, code trở nên khó đọc và khó bảo trì với nhiều callback lồng nhau. Đây chính là lý do Promise ra đời.
+
+## Phần 3: Promise trong JavaScript
+
+Promise là một đối tượng đại diện cho kết quả của một tác vụ bất đồng bộ. Nó có thể ở một trong ba trạng thái:
+- **Pending**: Trạng thái ban đầu, tác vụ chưa hoàn thành hoặc bị từ chối
+- **Fulfilled**: Tác vụ đã hoàn thành thành công
+- **Rejected**: Tác vụ bị lỗi hoặc bị từ chối
+
+**Tạo và sử dụng Promise:**
+
 \`\`\`javascript
 const myPromise = new Promise((resolve, reject) => {
+    // Thực hiện tác vụ bất đồng bộ
     setTimeout(() => {
         const success = true;
+        
         if (success) {
-            resolve('Thành công!');
+            resolve('Tác vụ hoàn thành thành công!');
         } else {
-            reject('Có lỗi!');
+            reject('Có lỗi xảy ra!');
         }
-    }, 1000);
+    }, 2000);
 });
 
+// Sử dụng Promise
 myPromise
-    .then(result => console.log(result))
-    .catch(error => console.error(error));
+    .then(result => {
+        console.log(result); // Output: Tác vụ hoàn thành thành công!
+    })
+    .catch(error => {
+        console.error(error);
+    })
+    .finally(() => {
+        console.log('Promise đã xử lý xong, bất kể thành công hay thất bại');
+    });
 \`\`\`
 
-**Async/Await (modern approach):**
+**Chuỗi Promise:** Một trong những lợi ích lớn nhất của Promise là khả năng chuỗi các tác vụ bất đồng bộ mà không cần lồng callback:
+
 \`\`\`javascript
-async function fetchData() {
+getUser(userId)
+    .then(user => getUserPosts(user.id))
+    .then(posts => getPostComments(posts[0].id))
+    .then(comments => displayComments(comments))
+    .then(() => console.log('Comments displayed'))
+    .catch(error => console.error('Có lỗi xảy ra:', error));
+\`\`\`
+
+**Promise.all() và Promise.race():**
+
+\`\`\`javascript
+// Promise.all() - chờ tất cả Promise hoàn thành
+const promises = [
+    fetchUser(),
+    fetchPosts(),
+    fetchComments()
+];
+
+Promise.all(promises)
+    .then(([user, posts, comments]) => {
+        // Xử lý khi cả 3 Promise đều hoàn thành
+        console.log(user, posts, comments);
+    })
+    .catch(error => {
+        // Nếu bất kỳ Promise nào bị lỗi
+        console.error(error);
+    });
+
+// Promise.race() - trả về Promise đầu tiên hoàn thành (hoặc bị lỗi)
+Promise.race([
+    fetchDataFromAPI1(),
+    fetchDataFromAPI2()
+])
+    .then(result => {
+        console.log('API nhanh nhất trả về:', result);
+    })
+    .catch(error => {
+        console.error('API đầu tiên bị lỗi:', error);
+    });
+\`\`\`
+
+## Phần 4: Async/Await - Cú pháp hiện đại hơn
+
+Mặc dù Promise đã cải thiện đáng kể cách chúng ta viết code bất đồng bộ, nhưng ES2017 giới thiệu Async/Await giúp code trở nên thậm chí còn dễ đọc hơn, gần giống với code đồng bộ thông thường.
+
+**Cú pháp cơ bản:**
+
+\`\`\`javascript
+async function fetchUserData() {
     try {
-        const response = await fetch('https://api.example.com/data');
-        const data = await response.json();
-        console.log(data);
-        return data;
+        const user = await getUser(userId);
+        const posts = await getUserPosts(user.id);
+        const comments = await getPostComments(posts[0].id);
+        await displayComments(comments);
+        console.log('Comments displayed');
     } catch (error) {
-        console.error('Lỗi:', error);
+        console.error('Có lỗi xảy ra:', error);
     }
 }
 
-// Gọi async function
-fetchData();
+// Gọi hàm async
+fetchUserData();
 \`\`\`
 
-**Multiple async operations:**
-\`\`\`javascript
-// Chạy tuần tự
-async function sequential() {
-    const user = await fetchUser();
-    const posts = await fetchPosts(user.id);
-    return { user, posts };
-}
+**Thực thi song song:**
 
-// Chạy song song
-async function parallel() {
-    const [users, posts] = await Promise.all([
-        fetchUsers(),
-        fetchPosts()
-    ]);
-    return { users, posts };
-}
-\`\`\`
-
-**Error Handling:**
 \`\`\`javascript
-async function getData() {
+async function fetchAllData() {
     try {
-        const response = await fetch('/api/data');
+        // Thực thi song song 3 Promise
+        const [user, posts, comments] = await Promise.all([
+            fetchUser(),
+            fetchPosts(),
+            fetchComments()
+        ]);
+        
+        console.log(user, posts, comments);
+    } catch (error) {
+        console.error('Có lỗi xảy ra:', error);
+    }
+}
+\`\`\`
+
+## Phần 5: Ví dụ thực tế - Gọi API với Fetch
+
+**Sử dụng Promise với Fetch:**
+
+\`\`\`javascript
+function getUsers() {
+    return fetch('https://api.example.com/users')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(users => {
+            console.log('Users:', users);
+            return users;
+        })
+        .catch(error => {
+            console.error('Error fetching users:', error);
+            throw error;
+        });
+}
+
+getUsers()
+    .then(users => console.log('Processed users:', users))
+    .catch(error => console.error('Error in main flow:', error));
+\`\`\`
+
+**Sử dụng Async/Await với Fetch:**
+
+\`\`\`javascript
+async function getUsers() {
+    try {
+        const response = await fetch('https://api.example.com/users');
         
         if (!response.ok) {
-            throw new Error('HTTP error! status: ' + response.status);
+            throw new Error('Network response was not ok');
         }
         
-        const data = await response.json();
-        return data;
+        const users = await response.json();
+        console.log('Users:', users);
+        return users;
     } catch (error) {
-        console.error('Fetch error:', error);
-        throw error; // Re-throw if needed
+        console.error('Error fetching users:', error);
+        throw error;
     }
 }
+
+async function main() {
+    try {
+        const users = await getUsers();
+        console.log('Processed users:', users);
+    } catch (error) {
+        console.error('Error in main flow:', error);
+    }
+}
+
+main();
 \`\`\`
 
-**Lợi ích của Async/Await:**
-- Code dễ đọc hơn, trông giống synchronous code
-- Error handling đơn giản với try/catch
-- Debugging dễ dàng hơn
-- Tránh được callback hell
+## Phần 6: So sánh Promise và Async/Await
 
-Async/await là công cụ cần thiết khi làm việc với APIs, database operations, và bất kỳ tác vụ bất đồng bộ nào.
+| Tiêu chí | Promise | Async/Await |
+|----------|---------|-------------|
+| Cú pháp | Chuỗi .then() và .catch() | Giống code đồng bộ với try/catch |
+| Độ phức tạp | Phức tạp hơn với nhiều .then() | Đơn giản, dễ đọc hơn |
+| Xử lý lỗi | .catch() hoặc .finally() | try/catch tiêu chuẩn |
+| Debug | Khó debug hơn | Dễ debug hơn |
+
+## Phần 7: Kết luận
+
+Lập trình bất đồng bộ là một phần không thể thiếu trong JavaScript hiện đại, đặc biệt là trong phát triển web. Promise và Async/Await là hai công cụ mạnh mẽ giúp chúng ta viết code bất đồng bộ một cách hiệu quả và dễ bảo trì.
+
+Mặc dù Async/Await có vẻ đơn giản và dễ sử dụng hơn, nhưng hiểu về Promise vẫn rất quan trọng vì Async/Await được xây dựng trên nền tảng của Promise. Trong nhiều tình huống, việc kết hợp cả hai kỹ thuật sẽ mang lại kết quả tốt nhất.
     `
   },
   {
