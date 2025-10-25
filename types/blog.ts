@@ -6,4 +6,5 @@ export interface BlogPost {
   tags: string[]
   category: 'java' | 'javascript'
   excerpt: string
+  readingTime?: string
 }
