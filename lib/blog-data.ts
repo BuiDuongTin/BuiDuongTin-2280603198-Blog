@@ -3,42 +3,206 @@ import { BlogPost } from '@/types/blog'
 export const blogPosts: BlogPost[] = [
   // Java Posts
   {
-    id: 'java-oop-basics',
-    title: 'Lập trình hướng đối tượng (OOP) trong Java - Khái niệm cơ bản',
-    date: '2025-01-15',
+    id: 'java-socket-programming-advanced',
+    title: 'Lập trình Socket với Java - Từ cơ bản đến nâng cao',
+    date: '2025-10-15',
     category: 'java',
-    excerpt: 'Tìm hiểu về 4 tính chất cơ bản của OOP: Encapsulation, Inheritance, Polymorphism và Abstraction trong Java',
-    tags: ['Java cơ bản', 'OOP', 'Lập trình mạng'],
+    excerpt: 'Hướng dẫn chi tiết về Socket Programming trong Java, từ các khái niệm cơ bản đến triển khai server multi-client và xử lý dữ liệu phức tạp',
+    tags: ['Java', 'Socket', 'Network Programming', 'Client-Server', 'Multithreading'],
+    readingTime: '15 phút',
     content: `
-Lập trình hướng đối tượng (OOP - Object-Oriented Programming) là một trong những paradigm quan trọng nhất trong Java. OOP giúp tổ chức code tốt hơn, dễ bảo trì và tái sử dụng.
+## Phần 1: Giới thiệu về lập trình Socket
 
-**4 tính chất cơ bản của OOP:**
+Lập trình Socket là một phần quan trọng của lập trình mạng, cho phép các chương trình trên các máy tính khác nhau giao tiếp với nhau thông qua mạng. Trong Java, chúng ta có thể sử dụng package \`java.net\` để làm việc với Socket.
 
-1. **Encapsulation (Đóng gói)**: Ẩn giấu dữ liệu bên trong class và chỉ cho phép truy cập thông qua các phương thức public. Điều này giúp bảo vệ dữ liệu và tránh được các thay đổi không mong muốn.
+Bài viết này sẽ giới thiệu về các khái niệm cơ bản của lập trình Socket, cách triển khai ứng dụng client-server đơn giản, và một số kỹ thuật nâng cao như xử lý nhiều client, gửi/nhận dữ liệu phức tạp và xử lý lỗi.
+
+## Phần 2: Cơ bản về Socket trong Java
+
+Trong Java, chúng ta có hai lớp Socket chính:
+- **Socket**: Sử dụng cho client để kết nối đến server
+- **ServerSocket**: Sử dụng cho server để lắng nghe các kết nối từ client
+
+## Phần 3: Tạo một Server đơn giản
+
+Đầu tiên, chúng ta sẽ tạo một server đơn giản lắng nghe kết nối ở cổng 5000:
 
 \`\`\`java
-public class Student {
-    private String name;
-    private int age;
-    
-    public String getName() {
-        return name;
-    }
-    
-    public void setName(String name) {
-        this.name = name;
+import java.io.*;
+import java.net.*;
+
+public class SimpleServer {
+    public static void main(String[] args) {
+        try {
+            ServerSocket serverSocket = new ServerSocket(5000);
+            System.out.println("Server đang lắng nghe ở cổng 5000...");
+            
+            // Chấp nhận kết nối từ client
+            Socket clientSocket = serverSocket.accept();
+            System.out.println("Đã kết nối với client!");
+            
+            // Tạo streams để gửi/nhận dữ liệu
+            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(
+                new InputStreamReader(clientSocket.getInputStream())
+            );
+            
+            // Đọc dữ liệu từ client
+            String inputLine;
+            while ((inputLine = in.readLine()) != null) {
+                System.out.println("Client: " + inputLine);
+                
+                // Gửi phản hồi về client
+                out.println("Server đã nhận: " + inputLine);
+                
+                // Nếu client gửi "exit", kết thúc
+                if ("exit".equals(inputLine)) {
+                    break;
+                }
+            }
+            
+            // Đóng kết nối
+            in.close();
+            out.close();
+            clientSocket.close();
+            serverSocket.close();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 \`\`\`
 
-2. **Inheritance (Kế thừa)**: Cho phép class con kế thừa các thuộc tính và phương thức từ class cha, giúp tái sử dụng code hiệu quả.
+## Phần 4: Tạo Client kết nối đến Server
 
-3. **Polymorphism (Đa hình)**: Khả năng sử dụng một interface chung cho nhiều kiểu dữ liệu khác nhau. Method overloading và method overriding là hai dạng đa hình phổ biến.
+Tiếp theo, chúng ta sẽ tạo một client kết nối đến server:
 
-4. **Abstraction (Trừu tượng)**: Ẩn đi các chi tiết phức tạp và chỉ hiển thị những tính năng cần thiết. Abstract class và Interface là hai cách để implement abstraction.
+\`\`\`java
+import java.io.*;
+import java.net.*;
 
-**Ứng dụng trong Lập trình mạng:**
-OOP rất hữu ích trong lập trình mạng khi chúng ta cần tạo các đối tượng như Socket, ServerSocket, Client, Server với các thuộc tính và hành vi riêng biệt.
+public class SimpleClient {
+    public static void main(String[] args) {
+        try {
+            // Kết nối đến server
+            Socket socket = new Socket("localhost", 5000);
+            
+            // Tạo streams để gửi/nhận dữ liệu
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(
+                new InputStreamReader(socket.getInputStream())
+            );
+            BufferedReader stdIn = new BufferedReader(
+                new InputStreamReader(System.in)
+            );
+            
+            String userInput;
+            System.out.println("Nhập tin nhắn gửi đến server (gõ 'exit' để thoát):");
+            
+            // Đọc input từ người dùng và gửi đến server
+            while ((userInput = stdIn.readLine()) != null) {
+                out.println(userInput);
+                
+                // Nhận phản hồi từ server
+                String serverResponse = in.readLine();
+                System.out.println("Server: " + serverResponse);
+                
+                // Nếu người dùng gõ "exit", kết thúc
+                if ("exit".equals(userInput)) {
+                    break;
+                }
+            }
+            
+            // Đóng kết nối
+            out.close();
+            in.close();
+            stdIn.close();
+            socket.close();
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+\`\`\`
+
+## Phần 5: Xử lý nhiều Client cùng lúc
+
+Server trên chỉ có thể phục vụ một client tại một thời điểm. Để xử lý nhiều client cùng lúc, chúng ta cần sử dụng multithreading:
+
+\`\`\`java
+import java.io.*;
+import java.net.*;
+
+public class MultiClientServer {
+    public static void main(String[] args) {
+        try {
+            ServerSocket serverSocket = new ServerSocket(5000);
+            System.out.println("Server đang lắng nghe ở cổng 5000...");
+            
+            while (true) {
+                // Chấp nhận kết nối từ client
+                Socket clientSocket = serverSocket.accept();
+                System.out.println("Đã kết nối với client mới!");
+                
+                // Tạo thread mới cho mỗi client
+                ClientHandler clientHandler = new ClientHandler(clientSocket);
+                new Thread(clientHandler).start();
+            }
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    // Lớp xử lý kết nối với mỗi client
+    private static class ClientHandler implements Runnable {
+        private final Socket clientSocket;
+        
+        public ClientHandler(Socket socket) {
+            this.clientSocket = socket;
+        }
+        
+        @Override
+        public void run() {
+            try {
+                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+                BufferedReader in = new BufferedReader(
+                    new InputStreamReader(clientSocket.getInputStream())
+                );
+                
+                String inputLine;
+                while ((inputLine = in.readLine()) != null) {
+                    System.out.println("Client: " + inputLine);
+                    out.println("Server đã nhận: " + inputLine);
+                    
+                    if ("exit".equals(inputLine)) {
+                        break;
+                    }
+                }
+                
+                in.close();
+                out.close();
+                clientSocket.close();
+                System.out.println("Client đã ngắt kết nối");
+                
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+\`\`\`
+
+## Phần 6: Kết luận
+
+Lập trình Socket với Java là một kỹ năng quan trọng cho các nhà phát triển ứng dụng mạng. Trong bài viết này, chúng ta đã tìm hiểu:
+- Cách tạo server và client cơ bản
+- Cách gửi và nhận dữ liệu qua socket
+- Cách xử lý nhiều client cùng lúc
+
+Trong các bài viết tiếp theo, chúng ta sẽ tìm hiểu về xử lý dữ liệu phức tạp, bảo mật trong lập trình Socket, và xây dựng ứng dụng chat hoàn chỉnh sử dụng Java Socket.
     `
   },
   {
