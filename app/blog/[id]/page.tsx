@@ -227,9 +227,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                 👤 Bùi Dương Tín
               </span>
               <span className="flex items-center gap-2 text-slate-400">
-                🕒 {post.readingTime || '5 phút đọc'}
-              </span>
-              <span className="flex items-center gap-2 text-slate-400">
                 📊 {getViewCount(post.id)} lượt xem
               </span>
             </div>
@@ -375,7 +372,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                       </p>
                       <div className="flex items-center gap-4 text-xs text-slate-500">
                         <span>📅 {new Date(relatedPost.date).toLocaleDateString('vi-VN')}</span>
-                        <span>🕒 {relatedPost.readingTime || '5 phút'}</span>
                       </div>
                     </div>
                   </Link>
