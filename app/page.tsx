@@ -74,13 +74,15 @@ export default function Home() {
             <div className="relative animate-float">
               {/* Glow effect */}
               <div className="absolute inset-0 rounded-full blur-2xl opacity-50 animate-pulse-glow bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500"></div>
-              {/* Profile circle */}
-              <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-full flex items-center justify-center text-7xl md:text-9xl font-extrabold shadow-2xl border-4 border-transparent bg-clip-padding bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-600"
-                   style={{
-                     boxShadow: '0 0 60px rgba(34, 211, 238, 0.6), 0 0 100px rgba(192, 132, 252, 0.4)'
-                   }}>
-                BĐT
-              </div>
+              {/* Profile image */}
+              <img
+                src="/BuiDuongTin-2280603198-Blog/images/chandung.jpg"
+                alt="Bùi Dương Tín"
+                className="relative w-72 h-72 md:w-96 md:h-96 rounded-full shadow-2xl border-4 border-transparent bg-clip-padding object-cover object-top"
+                style={{
+                  boxShadow: '0 0 60px rgba(34, 211, 238, 0.6), 0 0 100px rgba(192, 132, 252, 0.4)'
+                }}
+              />
             </div>
           </div>
         </div>
