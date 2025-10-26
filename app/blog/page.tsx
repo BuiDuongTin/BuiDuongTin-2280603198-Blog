@@ -1,13 +1,13 @@
 'use client'
 
 import Link from 'next/link'
-import { useState, useEffect, Suspense } from 'react'
+import { useState, useEffect, Suspense, useMemo, useCallback } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { getBlogPosts } from '@/lib/blog-data'
 
 function BlogContent() {
   const searchParams = useSearchParams()
-  const allPosts = getBlogPosts()
+  const allPosts = useMemo(() => getBlogPosts(), [])
   const [selectedTag, setSelectedTag] = useState<string | null>(null)
   
   // Read tag from URL query params on mount
@@ -19,19 +19,25 @@ function BlogContent() {
   }, [searchParams])
   
   // Filter posts based on selected tag
-  const posts = selectedTag 
-    ? allPosts.filter(post => post.tags.includes(selectedTag))
-    : allPosts
+  const posts = useMemo(() => 
+    selectedTag 
+      ? allPosts.filter(post => post.tags.includes(selectedTag))
+      : allPosts,
+    [allPosts, selectedTag]
+  )
   
   // Get all unique tags from all posts with counts
-  const tagCounts = allPosts.reduce((acc, post) => {
-    post.tags.forEach(tag => {
-      acc[tag] = (acc[tag] || 0) + 1
-    })
-    return acc
-  }, {} as Record<string, number>)
+  const tagCounts = useMemo(() => 
+    allPosts.reduce((acc, post) => {
+      post.tags.forEach(tag => {
+        acc[tag] = (acc[tag] || 0) + 1
+      })
+      return acc
+    }, {} as Record<string, number>),
+    [allPosts]
+  )
   
-  const allTags = Object.keys(tagCounts).sort()
+  const allTags = useMemo(() => Object.keys(tagCounts).sort(), [tagCounts])
 
   // Get category icons
   const getCategoryIcon = (post: any) => {
@@ -41,14 +47,22 @@ function BlogContent() {
   }
 
   // Deterministic stats based on post ID
-  const getPostStats = (postId: string) => {
+  const getPostStats = useCallback((postId: string) => {
     const hash = postId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
     return {
       views: 100 + (hash % 400),
       likes: 10 + (hash % 50),
       comments: 2 + (hash % 20)
     }
-  }
+  }, [])
+
+  const handleTagClick = useCallback((tag: string) => {
+    setSelectedTag(tag)
+  }, [])
+
+  const handleResetFilter = useCallback(() => {
+    setSelectedTag(null)
+  }, [])
 
   return (
     <div className="bg-slate-900 text-white min-h-screen">
@@ -79,7 +93,7 @@ function BlogContent() {
           <div className="flex flex-wrap gap-3 justify-center">
             {/* All button */}
             <button
-              onClick={() => setSelectedTag(null)}
+              onClick={handleResetFilter}
               className={`group relative px-6 py-3 glass rounded-lg text-sm font-medium transition-all hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 overflow-hidden ${
                 selectedTag === null 
                   ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white' 
@@ -106,7 +120,7 @@ function BlogContent() {
             {allTags.map((tag) => (
               <button
                 key={tag}
-                onClick={() => setSelectedTag(tag)}
+                onClick={() => handleTagClick(tag)}
                 className={`group relative px-6 py-3 glass rounded-lg text-sm font-medium transition-all hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20 overflow-hidden ${
                   selectedTag === tag 
                     ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-white' 
@@ -143,7 +157,7 @@ function BlogContent() {
               Không có bài viết nào với tag "{selectedTag}"
             </p>
             <button
-              onClick={() => setSelectedTag(null)}
+              onClick={handleResetFilter}
               className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg hover:from-cyan-400 hover:to-blue-400 transition-all hover:scale-105"
             >
               Xem tất cả bài viết
@@ -205,7 +219,7 @@ function BlogContent() {
                   {post.tags.slice(0, 2).map((tag) => (
                     <button
                       key={tag}
-                      onClick={() => setSelectedTag(tag)}
+                      onClick={() => handleTagClick(tag)}
                       className="px-3 py-1 bg-slate-700 text-slate-300 text-xs rounded-full group-hover:bg-slate-600 transition-colors hover:bg-cyan-500/20 hover:text-cyan-400"
                     >
                       {tag}
