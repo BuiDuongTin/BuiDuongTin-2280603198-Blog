@@ -33,7 +33,7 @@ export default function ProfilePage() {
                 <div className="relative animate-float">
                   <div className="absolute inset-0 rounded-full blur-2xl opacity-50 animate-pulse-glow bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500"></div>
                   <img
-                    src="/images/avatar.jpg"
+                    src="/BuiDuongTin-2280603198-Blog/images/avatar.jpg"
                     alt="Bùi Dương Tín"
                     className="relative w-48 h-48 rounded-full shadow-2xl border-4 border-transparent bg-clip-padding object-cover"
                   />
