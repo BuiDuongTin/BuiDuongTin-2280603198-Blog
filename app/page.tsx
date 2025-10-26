@@ -35,13 +35,14 @@ export default function Home() {
                 { name: 'OOP', icon: '🎯' },
                 { name: 'Networking', icon: '📡' }
               ].map((tag) => (
-                <span
+                <Link
                   key={tag.name}
+                  href={`/blog?tag=${encodeURIComponent(tag.name)}`}
                   className="px-4 py-2 bg-slate-800 text-white rounded-full text-sm font-medium hover:bg-slate-700 transition-all hover:scale-105 border-2 border-transparent hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/20"
                 >
                   <span className="mr-1">{tag.icon}</span>
                   {tag.name}
-                </span>
+                </Link>
               ))}
             </div>
 
@@ -129,12 +130,13 @@ export default function Home() {
 
                 <div className="flex flex-wrap gap-2">
                   {post.tags.slice(0, 3).map((tag) => (
-                    <span
+                    <Link
                       key={tag}
-                      className="px-3 py-1 bg-slate-700 text-slate-300 text-xs rounded-full group-hover:bg-slate-600 transition-colors"
+                      href={`/blog?tag=${encodeURIComponent(tag)}`}
+                      className="px-3 py-1 bg-slate-700 text-slate-300 text-xs rounded-full group-hover:bg-slate-600 transition-colors hover:bg-cyan-500/20 hover:text-cyan-400"
                     >
                       {tag}
-                    </span>
+                    </Link>
                   ))}
                 </div>
               </div>
