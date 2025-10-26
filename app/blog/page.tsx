@@ -196,9 +196,6 @@ function BlogContent() {
                       year: 'numeric'
                     })}
                   </span>
-                  <span className="text-xs text-slate-500 flex items-center gap-1">
-                    🕒 5 phút
-                  </span>
                 </div>
 
                 <h2 className="text-xl font-bold mb-3 group-hover:text-cyan-300 transition-colors min-h-[3.5rem]">
