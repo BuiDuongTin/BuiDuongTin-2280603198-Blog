@@ -186,9 +186,9 @@ export default function ProfilePage() {
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
-                  { image: '/BuiDuongTin-2280603198-Blog/images/nw.png', title: 'Thành tựu 1', pdfLink: '../images/NetworkingBasicsUpdate20251026-30-vihrkg.pdf' },
-                  { image: '/BuiDuongTin-2280603198-Blog/images/jv2.png', title: 'Thành tựu 2', pdfLink: '../images/JavaScriptEssentials2Update20251026-31-psumuq.pdf' },
-                  { image: '/BuiDuongTin-2280603198-Blog/images/jv1.png', title: 'Thành tựu 3', pdfLink: '../images/JavaScriptEssentials1Update20251026-32-f18m22.pdf' }
+                  { image: '../images/nw.png', title: 'Thành tựu 1', pdfLink: '../images/NetworkingBasicsUpdate20251026-30-vihrkg.pdf' },
+                  { image: '../images/jv2.png', title: 'Thành tựu 2', pdfLink: '../images/JavaScriptEssentials2Update20251026-31-psumuq.pdf' },
+                  { image: '../images/jv1.png', title: 'Thành tựu 3', pdfLink: '../images/JavaScriptEssentials1Update20251026-32-f18m22.pdf' }
                 ].map((achievement) => (
                   <div
                     key={achievement.title}
