@@ -186,9 +186,9 @@ export default function ProfilePage() {
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
-                  { icon: '🏆', title: 'Thành tựu 1' },
-                  { icon: '🎖️', title: 'Thành tựu 2' },
-                  { icon: '🌟', title: 'Thành tựu 3' }
+                  { image: '/BuiDuongTin-2280603198-Blog/images/jv1.png', title: 'Thành tựu 1' },
+                  { image: '/BuiDuongTin-2280603198-Blog/images/jv2.png', title: 'Thành tựu 2' },
+                  { image: '/BuiDuongTin-2280603198-Blog/images/nw.png', title: 'Thành tựu 3' }
                 ].map((achievement) => (
                   <div
                     key={achievement.title}
@@ -196,12 +196,11 @@ export default function ProfilePage() {
                   >
                     <div className="aspect-[4/3] bg-slate-800 flex items-center justify-center overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <div className="relative z-10 text-center p-4">
-                        <div className="text-6xl mb-2">{achievement.icon}</div>
-                        <p className="text-sm text-slate-400 group-hover:text-cyan-400 transition-colors">
-                          {achievement.title}
-                        </p>
-                      </div>
+                      <img
+                        src={achievement.image}
+                        alt={achievement.title}
+                        className="relative z-10 w-full h-full object-cover"
+                      />
                     </div>
                   </div>
                 ))}
