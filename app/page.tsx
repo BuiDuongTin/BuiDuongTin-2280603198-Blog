@@ -116,7 +116,7 @@ export default function Home() {
                     })}
                   </span>
                   <span className="text-xs text-slate-500 flex items-center gap-1">
-                    🕒 5 phút đọc
+                   
                   </span>
                 </div>
 
