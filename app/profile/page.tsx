@@ -186,9 +186,9 @@ export default function ProfilePage() {
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
-                  { image: '/BuiDuongTin-2280603198-Blog/images/jv1.png', title: 'Thành tựu 1' },
-                  { image: '/BuiDuongTin-2280603198-Blog/images/jv2.png', title: 'Thành tựu 2' },
-                  { image: '/BuiDuongTin-2280603198-Blog/images/nw.png', title: 'Thành tựu 3' }
+                  { image: '/BuiDuongTin-2280603198-Blog/images/jv1.png', title: 'Thành tựu 1', pdfLink: '/BuiDuongTin-2280603198-Blog/images/JavaScriptEssentials1Update20251026-32-f18m22.pdf' },
+                  { image: '/BuiDuongTin-2280603198-Blog/images/jv2.png', title: 'Thành tựu 2', pdfLink: '/BuiDuongTin-2280603198-Blog/images/JavaScriptEssentials2Update20251026-31-psumuq.pdf' },
+                  { image: '/BuiDuongTin-2280603198-Blog/images/nw.png', title: 'Thành tựu 3', pdfLink: '/BuiDuongTin-2280603198-Blog/images/NetworkingBasicsUpdate20251026-30-vihrkg.pdf' }
                 ].map((achievement) => (
                   <div
                     key={achievement.title}
@@ -199,8 +199,18 @@ export default function ProfilePage() {
                       <img
                         src={achievement.image}
                         alt={achievement.title}
-                        className="relative z-10 w-full h-full object-cover"
+                        className="relative z-10 w-full h-full object-contain p-2"
                       />
+                    </div>
+                    <div className="p-3 bg-slate-900/80 border-t border-slate-700">
+                      <a
+                        href={achievement.pdfLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block text-center px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white font-medium rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/50 hover:scale-105"
+                      >
+                        Xem thêm
+                      </a>
                     </div>
                   </div>
                 ))}
