@@ -309,7 +309,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
               <img
                 src="/BuiDuongTin-2280603198-Blog/images/chandung.jpg"
                 alt="Bùi Dương Tín"
-                className="relative w-24 h-24 rounded-full object-cover border-4 border-cyan-400"
+                className="relative w-24 h-24 rounded-full object-cover object-top border-4 border-cyan-400"
               />
             </div>
             
