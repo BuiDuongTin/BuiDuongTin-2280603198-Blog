@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { getBlogPost, getBlogPosts } from '@/lib/blog-data'
 import CodeBlock from '@/components/CodeBlock'
@@ -306,8 +307,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
             {/* Avatar */}
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 to-purple-400 rounded-full blur-lg opacity-50"></div>
-              <div className="relative w-24 h-24 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full flex items-center justify-center text-4xl font-bold">
-                BĐT
+              <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-cyan-400">
+                <Image
+                  src="/images/chandung.jpg"
+                  alt="Bùi Dương Tín"
+                  width={96}
+                  height={96}
+                  className="object-cover w-full h-full"
+                />
               </div>
             </div>
             
