@@ -330,12 +330,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
                 >
                   <span>💻</span> GitHub
                 </a>
-                <a 
+                <Link 
                   href="/profile" 
                   className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white text-sm rounded-lg transition-all hover:scale-105 flex items-center gap-2"
                 >
                   <span>👤</span> Xem Profile
-                </a>
+                </Link>
               </div>
             </div>
           </div>
