@@ -185,38 +185,26 @@ export default function ProfilePage() {
                 Thành tựu
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {/* Achievement 1 */}
-                <div className="group relative overflow-hidden rounded-lg border border-slate-700 hover:border-cyan-500/50 transition-all duration-300">
-                  <div className="aspect-[4/3] bg-slate-800 flex items-center justify-center overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="relative z-10 text-center p-4">
-                      <div className="text-6xl mb-2">🏆</div>
-                      <p className="text-sm text-slate-400 group-hover:text-cyan-400 transition-colors">Thành tựu 1</p>
+                {[
+                  { icon: '🏆', title: 'Thành tựu 1' },
+                  { icon: '🎖️', title: 'Thành tựu 2' },
+                  { icon: '🌟', title: 'Thành tựu 3' }
+                ].map((achievement) => (
+                  <div
+                    key={achievement.title}
+                    className="group relative overflow-hidden rounded-lg border border-slate-700 hover:border-cyan-500/50 transition-all duration-300"
+                  >
+                    <div className="aspect-[4/3] bg-slate-800 flex items-center justify-center overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div className="relative z-10 text-center p-4">
+                        <div className="text-6xl mb-2">{achievement.icon}</div>
+                        <p className="text-sm text-slate-400 group-hover:text-cyan-400 transition-colors">
+                          {achievement.title}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-
-                {/* Achievement 2 */}
-                <div className="group relative overflow-hidden rounded-lg border border-slate-700 hover:border-cyan-500/50 transition-all duration-300">
-                  <div className="aspect-[4/3] bg-slate-800 flex items-center justify-center overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="relative z-10 text-center p-4">
-                      <div className="text-6xl mb-2">🎖️</div>
-                      <p className="text-sm text-slate-400 group-hover:text-cyan-400 transition-colors">Thành tựu 2</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Achievement 3 */}
-                <div className="group relative overflow-hidden rounded-lg border border-slate-700 hover:border-cyan-500/50 transition-all duration-300">
-                  <div className="aspect-[4/3] bg-slate-800 flex items-center justify-center overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="relative z-10 text-center p-4">
-                      <div className="text-6xl mb-2">🌟</div>
-                      <p className="text-sm text-slate-400 group-hover:text-cyan-400 transition-colors">Thành tựu 3</p>
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
