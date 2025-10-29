@@ -306,9 +306,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ id: s
             {/* Avatar */}
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 to-purple-400 rounded-full blur-lg opacity-50"></div>
-              <div className="relative w-24 h-24 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full flex items-center justify-center text-4xl font-bold">
-                BĐT
-              </div>
+              <img
+                src="/BuiDuongTin-2280603198-Blog/images/chandung.jpg"
+                alt="Bùi Dương Tín"
+                className="relative w-24 h-24 rounded-full object-cover border-4 border-cyan-400"
+              />
             </div>
             
             {/* Author info */}
