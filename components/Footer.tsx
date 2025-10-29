@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function Footer() {
   return (
     <footer className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-300 mt-16 border-t border-slate-700">
@@ -27,14 +29,14 @@ export default function Footer() {
             <h3 className="text-white font-bold text-lg mb-4 gradient-text">Liên kết</h3>
             <ul className="space-y-2">
               <li>
-                <a href="/blog" className="text-slate-400 hover:text-cyan-400 transition-colors text-sm">
+                <Link href="/blog" className="text-slate-400 hover:text-cyan-400 transition-colors text-sm">
                   📚 Blog
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/profile" className="text-slate-400 hover:text-cyan-400 transition-colors text-sm">
+                <Link href="/profile" className="text-slate-400 hover:text-cyan-400 transition-colors text-sm">
                   👤 Về tôi
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
