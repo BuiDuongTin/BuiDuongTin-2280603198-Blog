@@ -186,9 +186,9 @@ export default function ProfilePage() {
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
-                  { image: '../images/nw.png', title: 'Thành tựu 1' },
-                  { image: '../images/jv2.png', title: 'Thành tựu 2' },
-                  { image: '../images/jv1.png', title: 'Thành tựu 3' }
+                  { image: '/BuiDuongTin-2280603198-Blog/images/nw.png', title: 'Thành tựu 1' },
+                  { image: '/BuiDuongTin-2280603198-Blog/images/jv2.png', title: 'Thành tựu 2' },
+                  { image: '/BuiDuongTin-2280603198-Blog/images/jv1.png', title: 'Thành tựu 3' }
                 ].map((achievement) => (
                   <div
                     key={achievement.title}
