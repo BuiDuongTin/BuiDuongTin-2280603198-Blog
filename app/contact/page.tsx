@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+const EMAIL = 'tinbui.koks@gmail.com'
+
 export default function ContactPage() {
   return (
     <div className="bg-slate-900 text-white min-h-screen">
@@ -38,10 +40,10 @@ export default function ContactPage() {
               </div>
               <h3 className="text-2xl font-bold gradient-text">Email</h3>
               <a
-                href="mailto:tinbui.koks@gmail.com"
+                href={`mailto:${EMAIL}`}
                 className="text-cyan-400 hover:text-cyan-300 transition-colors text-lg font-medium"
               >
-                tinbui.koks@gmail.com
+                {EMAIL}
               </a>
               <p className="text-slate-400 text-sm">
                 Gửi email cho mình bất cứ lúc nào!
@@ -96,7 +98,7 @@ export default function ContactPage() {
             </a>
 
             <a
-              href="mailto:tinbui.koks@gmail.com"
+              href={`mailto:${EMAIL}`}
               className="flex items-center gap-4 p-4 bg-slate-800 hover:bg-slate-700 rounded-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/20"
             >
               <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
