@@ -18,6 +18,11 @@ export default function ProfilePage() {
               <span className="gradient-text">Về tôi</span>
             </h1>
             <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-400 mx-auto rounded-full"></div>
+            <div className="mt-6">
+              <p className="text-xl md:text-2xl text-slate-300 font-medium italic">
+                "Lập trình bằng đam mê, chinh phục bằng nỗ lực"
+              </p>
+            </div>
           </div>
         </div>
       </div>
